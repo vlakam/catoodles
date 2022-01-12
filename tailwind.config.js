@@ -6,7 +6,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'bg': '#faf3ef'
+        'bg': '#faf3ef',
+        'pinky-text': '#FF96AB',
+        'kris-red': '#e6355c'
       }
     },
   },
