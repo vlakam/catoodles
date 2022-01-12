@@ -131,16 +131,16 @@ onMounted(async () => {
                 <h1 class="text-2xl text-kris-red mb-4 uppercase tracking-widest">Catoodles</h1>
                 <p class="gap-5 mb-6 flex flex-row justify-center">
                     <a href="https://twitter.com" target="_blank">
-                        <img class="w-14 h-14 rendering-crisp-edges" src="./assets/Twitter.png" />
+                        <img class="w-14 h-14 rendering-crisp-edges hover:opacity-75" src="./assets/Twitter.png" />
                     </a>
                     <a href="https://discord.gg" target="_blank">
-                        <img class="w-14 h-14 rendering-crisp-edges" src="./assets/Discord.png" />
+                        <img class="w-14 h-14 rendering-crisp-edges hover:opacity-75" src="./assets/Discord.png" />
                     </a>
                     <a href="https://opensea.io/" target="_blank">
-                        <img class="w-14 h-14 rendering-crisp-edges" src="./assets/Opensea.png" />
+                        <img class="w-14 h-14 rendering-crisp-edges hover:opacity-75" src="./assets/Opensea.png" />
                     </a>
                     <a href="https://etherscan.io/" target="_blank">
-                        <img class="w-14 h-14 rendering-crisp-edges" src="./assets/Etherscan.png" />
+                        <img class="w-14 h-14 rendering-crisp-edges hover:opacity-75" src="./assets/Etherscan.png" />
                     </a>
                 </p>
                 <p class="mb-6 text-base text-justify px-2 lg:px-0">
@@ -153,7 +153,7 @@ onMounted(async () => {
                     <!-- <span class="text-center" v-else>{{styledAccount}}</span> -->
                 </p>
                 <div class="mb-3 text-sm font-bold flex flex-col w-1/3 mx-auto items-center" v-if="connected">
-                    <img class="w-full h-auto mx-auto rendering-crisp-edges cursor-pointer disabled:cursor-not-allowed disabled:opacity-50" src="./assets/Mint.png" :disabled="disableButton" @click="mint" />
+                    <img class="w-full h-auto mx-auto rendering-crisp-edges cursor-pointer hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50" src="./assets/Mint.png" :disabled="disableButton" @click="mint" />
                     <div class="flex flex-row justify-center items-center gap-4 px-5">
                         <input class="bg-bg" type="range" min="1" :max="maxAmount" v-model.number="amount" />
                         <span class="w-6 text-pinky-text">{{amount}}</span>
