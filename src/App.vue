@@ -21,13 +21,14 @@ const updateSupply = async () => {
     if (!contract) return;
     try {
         totalSupply.value = (await contract.totalSupply()).toNumber();
+        const maxSupply = (await contract.MAX_NFT_SUPPLY()).toNumber();
         console.log(unref(totalSupply));
         if (userAccount.value) {
             const balance = (
                 await contract.mintedNFTs(userAccount.value)
             ).toNumber();
 
-            maxAmount.value = Math.min(10, 100 - balance);
+            maxAmount.value = Math.max(Math.min(10 - balance, maxSupply - totalSupply.value), 0);
         } else {
             maxAmount.value = 10;
         }
@@ -46,7 +47,7 @@ const mint = async () => {
     // if (!isSaleActive.value) {
     //     return alert("Sale is not active now");
     // }
-    if (maxAmount.value === 0) {
+    if (maxAmount.value === 0 || maxAmount.value < 0) {
         return alert("You have minted maximum amount for this wallet");
     }
     if (amount.value > maxAmount.value) {
