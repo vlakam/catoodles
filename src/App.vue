@@ -165,8 +165,8 @@ onMounted(async () => {
                 <div class="mb-3 text-sm font-bold flex flex-col w-1/3 mx-auto items-center" v-if="connected">
                     <img class="w-full h-auto mx-auto rendering-crisp-edges cursor-pointer hover:opacity-75" :class="{'cursor-not-allowed opacity-50': disableButton}" src="./assets/Mint.png" @click="mint" />
                     <div class="flex flex-row justify-center items-center gap-4 px-5">
-                        <input class="bg-bg" type="range" min="1" :max="maxAmount" v-model.number="amount" />
-                        <span class="w-6 text-pinky-text">{{amount}}</span>
+                        <input class="bg-bg" type="range" min="1" :max="maxAmount" v-if="maxAmount > 1" v-model.number="amount" />
+                        <span class="w-6 text-pinky-text" v-if="maxAmount > 1">{{amount}}</span>
                     </div>
                 </div>
                 <p class="text-sm text-center">
