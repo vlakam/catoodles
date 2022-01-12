@@ -22,10 +22,20 @@ const updateSupply = async () => {
     try {
         totalSupply.value = (await contract.totalSupply()).toNumber();
         console.log(unref(totalSupply));
+        if (userAccount.value) {
+            const balance = (
+                await contract.mintedNFTs(userAccount.value)
+            ).toNumber();
+
+            maxAmount.value = Math.min(10, 100 - balance);
+        } else {
+            maxAmount.value = 10;
+        }
     } catch (e) {}
 };
 
 const mint = async () => {
+    if (disableButton.value) return;
     if (!provider)
         return alert(
             "Non-Ethereum browser detected. You should consider trying MetaMask!"
@@ -60,7 +70,7 @@ const mint = async () => {
             gasLimit,
         });
         await transaction.wait();
-        mintAmount.value = 1;
+        amount.value = 1;
     } catch (e) {
         alert(e.message || e);
     } finally {
@@ -153,7 +163,7 @@ onMounted(async () => {
                     <!-- <span class="text-center" v-else>{{styledAccount}}</span> -->
                 </p>
                 <div class="mb-3 text-sm font-bold flex flex-col w-1/3 mx-auto items-center" v-if="connected">
-                    <img class="w-full h-auto mx-auto rendering-crisp-edges cursor-pointer hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50" src="./assets/Mint.png" :disabled="disableButton" @click="mint" />
+                    <img class="w-full h-auto mx-auto rendering-crisp-edges cursor-pointer hover:opacity-75" :class="{'cursor-not-allowed opacity-50': disableButton}" src="./assets/Mint.png" @click="mint" />
                     <div class="flex flex-row justify-center items-center gap-4 px-5">
                         <input class="bg-bg" type="range" min="1" :max="maxAmount" v-model.number="amount" />
                         <span class="w-6 text-pinky-text">{{amount}}</span>
